@@ -9,6 +9,7 @@ on:
       - vote/**
       - worker/**
       - result/**
+      - .github/workflows/**
   pull_request:
     branches:
       - feature/**
@@ -16,7 +17,8 @@ on:
       - vote/**
       - worker/**
       - result/**
-      - .github/workflows/dev.yml
+      - .github/workflows/**
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -52,7 +54,7 @@ jobs:
           docker push ghcr.io/jruiz1601/result:${{ github.sha }}
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     needs: build-and-push
     runs-on: ubuntu-latest
 
