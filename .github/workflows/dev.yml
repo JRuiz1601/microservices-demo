@@ -75,17 +75,14 @@ jobs:
       - name: Deploy vote
         run: |
           helm upgrade --install vote ./vote/chart \
-            --set image.repository=ghcr.io/jruiz1601/vote \
-            --set image.tag=${{ github.sha }}
+            --set image=ghcr.io/jruiz1601/vote:${{ github.sha }}
 
       - name: Deploy worker
         run: |
           helm upgrade --install worker ./worker/chart \
-            --set image.repository=ghcr.io/jruiz1601/worker \
-            --set image.tag=${{ github.sha }}
+            --set image=ghcr.io/jruiz1601/worker:${{ github.sha }}
 
       - name: Deploy result
         run: |
           helm upgrade --install result ./result/chart \
-            --set image.repository=ghcr.io/jruiz1601/result \
-            --set image.tag=${{ github.sha }}
+            --set image=ghcr.io/jruiz1601/result:${{ github.sha }}
