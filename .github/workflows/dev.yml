@@ -9,6 +9,7 @@ on:
       - vote/**
       - worker/**
       - result/**
+      - .github/workflows/dev.yml
   pull_request:
     branches:
       - feature/**
