@@ -7,6 +7,17 @@ Distributed voting application built with Java, Go, Node.js, Kafka, and PostgreS
 - Juan Esteban Ruiz
 - Tomas Quintero
 
+## Branching Strategy (GitFlow)
+
+Development branches:
+
+- `main` -> production, protected branch
+- `feature/**` -> new features and fixes
+- `infra/**` -> infrastructure changes (Terraform)
+
+Dev team opens PRs from `feature/` to `main`.
+Ops team opens PRs from `infra/` to `main`, and only changes `terraform/`.
+
 ## Architecture
 
 ![Architecture diagram](diagram.svg)
@@ -79,29 +90,20 @@ Workflow file: `.github/workflows/infra.yml`
 
 Both jobs authenticate to Azure using GitHub Secrets (`AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_SUBSCRIPTION_ID`, `AZURE_TENANT_ID`).
 
-## Run with Okteto (dev)
+## Required GitHub Secrets
 
-```bash
-git clone https://github.com/okteto/microservices-demo
-cd microservices-demo
-okteto login
-okteto deploy
-```
+| Secret | Description |
+|---|---|
+| `AZURE_CLIENT_ID` | Azure service principal client ID |
+| `AZURE_CLIENT_SECRET` | Azure service principal secret |
+| `AZURE_SUBSCRIPTION_ID` | Azure subscription ID |
+| `AZURE_TENANT_ID` | Azure tenant ID |
+| `GHCR_TOKEN` | GitHub token with `packages:write` permission |
 
-Develop per service:
+## Agile Methodology
 
-```bash
-okteto up result
-```
-
-```bash
-okteto up vote
-```
-
-```bash
-okteto up worker
-make start
-```
+This project follows **Scrum** with short sprints.
+GitFlow supports the sprint cycle: features are developed in branches and merged to `main` at sprint review for deployment.
 
 ## Notes
 
